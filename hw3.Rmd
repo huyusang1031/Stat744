@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE,fig.width=15,fig.height=12)
 
 ## Introduction
 
+JD: Using free axes seems like a bad choice here. You can't gain much, and you're losing a chance to allow a clear comparison. You don't really discuss your choice of a bar chart; to me it seems confusing when the CIs are so wide. This is particularly true for the second plot, which is pretty hard to interpret because the CIs happen to be so close to the bottom of the bars. The color is not adding any information (nor is the color legend, therefore).
+
 The following table is sourced from Dushoff et al. (2005). This table includes 4 variables: cause (H3N2, H1N1, B, Cold, Total), area (New York metropolitan area, Illinois and Indiana), number of deaths, 95% confidence interval. I'll split this table into two graphs. The first graph will include number of deaths and 95% confidence interval for H3N2, H1N1, B and cold in both two areas. The second graph will include number of death and 95% confidence interval for only Total in both two areas.
 
 ```{r pressure,echo=FALSE,out.width='60%'}
@@ -61,3 +63,5 @@ From the second plot, we can observe that the Illinois and Indiana has the highe
 
 ## Reference
 Dushoff, J., Plotkin, J. B., Viboud, C., Earn, D. J. D., & Simonsen, L. (2005). Mortality due to Influenza in the United States¡ªAn Annualized Regression Approach Using Multiple-Cause Mortality Data. American Journal of Epidemiology, 163(2), 181¨C187. doi: 10.1093/aje/kwj024
+
+Grade: 1.8/3 (OK)
