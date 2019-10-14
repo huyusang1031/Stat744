@@ -14,13 +14,15 @@ knitr::opts_chunk$set(echo = TRUE,fig.width=15,fig.height=12)
 ## Introduction
 
 "bdf" is a data set describes the language scores of 8-graders in the Netherlands. There are 28 variables in this data set, I'll pick some of them to do a research. I'll choose 'repeatgr' as response variable, 'IQ.perf','Sex','Minority','ses','mixedgra' and 'schoolNR' as predictos, where 'sex','Minority','mixedgra','IQ.perf','ses' are fixed effects and 'schoolNR' is random effect. Following are descriptions of these variables:
-repeatgr: Factor with 3 levels '0', '1', '2'. An ordered factor indicating if one or more grades have been repeated.
-IQ.perf: Number. A numeric vector of IQ scores.
-sex: Factor with 2 levels '0', '1'. Sex of the student.
-Minority: Factor with 2 levels 'N', 'Y'. A factor indicating if the student is a member of a minority group.
-ses: Number. A numeric vector of socioeconomic status indicators.
-mixedgra: Factor with 2 levels '0', '1'. A factor indicating if the class is a mixed-grade class.
-schoolNR: Factor with 131 levels. A factor denoting the school.
+
+- `repeatgr`: Factor with 3 levels '0', '1', '2'. An ordered factor indicating if one or more grades have been repeated.
+- `IQ.perf`: Number. A numeric vector of IQ scores.
+- `sex`: Factor with 2 levels '0', '1'. Sex of the student.
+- `Minority`: Factor with 2 levels 'N', 'Y'. A factor indicating if the student is a member of a minority group.
+- `ses`: Number. A numeric vector of socioeconomic status indicators.
+- `mixedgra`: Factor with 2 levels '0', '1'. A factor indicating if the class is a mixed-grade class.
+- `schoolNR`: Factor with 131 levels. A factor denoting the school.
+
 From above we can observe that there are two types of fixed effects: factor and number. My research of interest is finding out the predictor that has more effects on students' likelihood to repeat a grade in each parameter type (i.e. factor, number). I'll fit the model by using both generalized linear mixed model and generalized linear model, and compare estimators between them by using ggplot. 
 
 ## Generalized linear mixed model
@@ -100,5 +102,12 @@ g1 %+% m1_reorder
 
 From the plot, we can observe that:
 1. it is clear that 'Mixed-grade class' (i.e. 'mixedgra1') is not significant since its confidence interval includes zero, so there is insufficient evidence to conclude that this predictor has effect on students' likelihood to repeat a grade.
+**BMB: not quite. We know it has SOME effect (outside of theoretical physics, predictors always have some effect). What we don't know is what the direction of the effect is (its magnitude of effect appears to be smaller than, but not too different from, the effect if minority group).**
+
 2. When the type of parameter is 'factor', 'Sex of the student' (i.e. 'sex1') has more (negative) effects on students' likelihood to repeat a grade and 'Minority group' (i.e. 'MinorityY') has more (positive) effects on students' likelihood to repeat a grade; when the type of parameter is 'number', 'Socioeconomic status' (i.e. ses) has more (negative) effects on students' likelihood to repeat a grade.
-3. we cannot determine which model is better without other informations, but we can conclude that all significant fixed effects in GLMM have larger effects (i.e. larger coefficients) than in GLM.
+
+3. we cannot determine which model is better without other informations, but we can conclude that all significant fixed effects in GLMM have larger effects (i.e. larger coefficients) than in GLM. **BMB: yes, although the differences seem very small.**
+
+**it's not absolutely clear to me why it's worth splitting variables into factors and numeric (although it does illustrate faceting nicely). Part of the point of scaling continuous variables by 2SD is that it's supposed to make them more comparable to the dummy variables derived from categorical predictor variables (see Gelman's paper on this**
+
+**BMB: score=2**
