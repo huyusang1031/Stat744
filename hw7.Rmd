@@ -1,0 +1,59 @@
+---
+title: "Assignment Week 7"
+author: "Yusang Hu 400177333"
+output:
+  html_document:
+    df_print: paged
+Date: Nov 5, 2019
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,fig.width=10,fig.height=8)
+```
+
+## Data Set
+
+mpg is a data set from package 'ggplot2'. In this assignment, I'll study the relations between miles per gallon on highway and engine displacement, and also type of car, number of cylinders.
+
+## Why using scatter plot
+
+I choose to use scatter plot because it makes the comprisons more straightforward, readers can easily understand many informations including the relationship between miles per gallon on highway and engine displacement, the concentrate distribution of each type of car, how is the type of a car relate to the number of cylinders. 
+
+## Why using interactive plot
+
+However, scatter plot can give informations about 'relation', but it could not give any informations about 'background' of a specific point. Therefore, I added interactive component to my plot. In addition to engine displacement, number of cylinders, miles per gallon on highway and type of a car, I added some informations about a car's 'background' including manufacturer of a car, model of a car, and year of production. The interactive plot helps readers better understand a specific car's (or point) properties, and also helps potential purchasers obtain all useful informations about their favorite car.
+
+## How to make interactive components clear
+
+To make interactive components clear, I:
+1. Rename labels (i.e. displ, cyl, hwy, class) in tooltip
+2. Add three more labels: manufacturer, model, year
+3. show new name of 'displ','cyl','hwy' and 'class', and three new labels in tooltip
+
+## Rubric
+
+Scatter plot:
+1. Color: the original order of colors is confusion and looks inaesthetic in visual, hence, I reordered the color of bubbles
+2. Legend: the ordering of the legend is approximately match order on plot after I reordered the color of bubbles
+3. Layout (i.e. title, labels): I added a title to my plot, and renamed x-axis and y-axis to make them more meaningful
+
+Interactive Components:
+1. tooltip: I renamed labels and added three more labels to the tooltip, and the ordering of informations in the tooltip is appropriate (i.e. first three are numerical information, last five are literal information).
+
+```{r}
+library(plotly)
+library(ggplot2)
+p1<-mpg%>%
+  ggplot(aes(x=displ,y=hwy,text=paste('engine displacement:',displ,
+                                      '<br>number of cylinders:',cyl,
+                                      '<br>highway miles per gallon:',hwy,
+                                      '<br>type of Car:',reorder(class,cyl)),label=manufacturer,
+             label2=model,label3=year))+
+  geom_point(aes(color=reorder(class,cyl),size=cyl))+
+  labs(x="Engine displacement (in litres)",y="Highway miles per gallon",size="model")+
+  scale_size(range=c(3,8))+
+  ggtitle("Engine Displacement vs. Highway Efficiency")+
+  theme(plot.title=element_text(face="bold",hjust=0.5),legend.title = element_blank())
+ggplotly(p1,tooltip = c("text","label","label2","label3"))
+```
+
