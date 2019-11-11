@@ -110,4 +110,4 @@ From the plot, we can observe that:
 
 **it's not absolutely clear to me why it's worth splitting variables into factors and numeric (although it does illustrate faceting nicely). Part of the point of scaling continuous variables by 2SD is that it's supposed to make them more comparable to the dummy variables derived from categorical predictor variables (see Gelman's paper on this**
 
-**BMB: score=2**
+**BMB: Good comments. score=2**

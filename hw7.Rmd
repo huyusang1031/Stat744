@@ -17,7 +17,7 @@ mpg is a data set from package 'ggplot2'. In this assignment, I'll study the rel
 
 ## Why using scatter plot
 
-I choose to use scatter plot because it makes the comprisons more straightforward, readers can easily understand many informations including the relationship between miles per gallon on highway and engine displacement, the concentrate distribution of each type of car, how is the type of a car relate to the number of cylinders. 
+I choose to use scatter plot because it makes the comparisons more straightforward, readers can easily understand many different kinds of information including the relationship between miles per gallon on highway and engine displacement, the concentrate distribution of each type of car, how is the type of a car relate to the number of cylinders. 
 
 ## Why using interactive plot
 
@@ -33,7 +33,7 @@ To make interactive components clear, I:
 ## Rubric
 
 Scatter plot:
-1. Color: the original order of colors is confusion and looks inaesthetic in visual, hence, I reordered the color of bubbles
+1. Color: the original order of colors is confusing and looks inaesthetic in visual, hence, I reordered the color of bubbles
 2. Legend: the ordering of the legend is approximately match order on plot after I reordered the color of bubbles
 3. Layout (i.e. title, labels): I added a title to my plot, and renamed x-axis and y-axis to make them more meaningful
 
@@ -56,4 +56,6 @@ p1<-mpg%>%
   theme(plot.title=element_text(face="bold",hjust=0.5),legend.title = element_blank())
 ggplotly(p1,tooltip = c("text","label","label2","label3"))
 ```
+
+**BMB: the size legend seems to have gotten lost in plotly. Since you have overlapping points, I might have considered setting `alpha`<1, and/or specifying a colour for the edge of the point (use `pch=21`).  Did you think about a colour scale and/or background colour different from the default?  It might be more efficient to reorder the class once. I'm not quite sure what average number of cylinders by class tells me ...?  Score: 2**
 
