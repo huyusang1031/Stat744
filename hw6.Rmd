@@ -31,6 +31,10 @@ library(ggplot2)
 library(arules)
 rm(list=ls())
 #setwd("/Users/admin/Desktop/744")
+
+## JD: This works, but it would be better to use relative paths. Since your script and .csv are in the same place, you can use Rstudio "set path to script location" and then just say
+## groceries<-read.transactions("groceries.csv",sep=",")
+
 groceries<-read.transactions("https://raw.githubusercontent.com/huyusang1031/Stat744/master/groceries.csv",sep=",")
 itemFrequencyGGPlot <- function(x, topN) {
   library(tidyverse)
@@ -60,6 +64,8 @@ I choose to use parallel coordinate plot because the correlations between items 
 The parallel coordinate plot tell us that:
 1. Since I'm going to study which items can be classified into the same aisle with 'whole milk', I'll concentrate on finding the item that have association with whole milk. The line starts with whole milk shows us that when I have whole milk and onions in my shopping cart, I'm highly likely to buy other vegetables as well.
 
+JD: OK, but why are you more interested in the rule that starts with whole milk than the ones that have whole milk at rhs?
+
 ```{r}
 library(arulesViz)
 params<-list(support=0.006,confidence=0.5)
@@ -71,12 +77,20 @@ plot(fit[1:20],method="paracoord",control=list(reorder=TRUE))
 
 From the histogram and the parallel coordinate plot, I'll conclude that I'll put whole milk, vegetables and eggs in same aisle.
 
+JD: Your other conclusion seemed to be onions. Why is it eggs now?
+
 ## Rubric
 
+JD: Your histogram is fine, but the explanations don't make much sense to me. Interested in highest and lowest is not a difference between scales (any scale can be used for that). Histograms with bars should always be linear and anchored at zero anyway, because of the physical interpretation.
+
 Histogram: I choose linear scale because differences between each items can easily be measured with the help of linear scale; I choose anchored at zero, because I'm interested in which item has highest frequency and lowest frequency, I'm not interested in small differences between each bar. I flipped the histogram over because x-axis labels are hard to read in default plot (i.e. items' name are vertically). My categorical variables are ordered from highest frequency to lowest frequency, so it's sensible.
+
+JD: More explanation of the rules and the paracoord plot are required. I was really not able to figure out what the rules mean, why there are extra lines sticking out of the rhs, or how you reached your final conclusion.
 
 Parallel Coordinate Plot: The x-axis scale is special in this plot, it is neither linear, log, logit or sqrt, instead, it represents the position of each association rule, where '2' and '1' means the left hand side of rules and 'rhs' means the right hand side of rules. I didn't reorder y-axis labels because I'm not interested in the ranking of items.
 
 ## Reference
 
 Hahsler, M., Hornik, K., & Reutterer, T. (n.d.). Implications of Probabilistic Data Modeling for Mining Association Rules. From Data and Information Analysis to Knowledge Engineering Studies in Classification, Data Analysis, and Knowledge Organization, 598–605. doi: 10.1007/3-540-31314-1_73
+
+Grade: 1.6/3.
